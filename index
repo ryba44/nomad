@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomad Client | Beta V0.4 (Minecraft 1.21.11)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f13;
+            --surface-color: #1a1a20;
+            --accent-color: #8b9bff;
+            --accent-hover: #7284f5;
+            --text-main: #ffffff;
+            --text-muted: #8b8b93;
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .nav-container {
+            background-color: var(--surface-color);
+            padding: 10px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: lowercase;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: var(--text-main);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            color: var(--text-muted);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 60px 20px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background-color: var(--surface-color);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-item h4 {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .discord-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            background-color: rgba(139, 155, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .discord-link:hover {
+            color: var(--accent-hover);
+            background-color: rgba(139, 155, 255, 0.15);
+        }
+
+        .discord-icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Fullscreen Changelog Modal */
+        .changelog-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 15, 19, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .changelog-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .changelog-content {
+            background-color: var(--surface-color);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .changelog-content h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .changelog-content .date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .changes-list {
+            list-style: none;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .changes-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: #d1d1d1;
+        }
+
+        .changes-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .download-final-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.8rem; }
+            .button-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            .changelog-content { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">N</span> nomad
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>get good,<br>get <span>nomad.</span></h1>
+            <p>Elevate your gameplay to the next level. Control, speed, and accuracy — everything is already inside.</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="openChangelog()">Download Beta V0.4 (1.21.11)</button>
+                <a href="#faq" class="btn btn-secondary">FAQ</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-item">
+                <h3>Install in minutes</h3>
+                <p>From downloading to your first game — no complex setups. Get the installer and start playing immediately.</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3>Play and dominate</h3>
+                <p>Choose your server and launch. Absolute control from the very first second.</p>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <h4>How to install the cheat?</h4>
+                    <p>First, download the loader from our website. Open it and click the "Load" button. Once that is done, launch TLauncher or your official Minecraft Launcher. You will automatically see a new profile named "Nomad" ready to launch and play.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Is it safe to use?</h4>
+                    <p>Yes, Nomad is fully optimized and regularly updated to ensure maximum security and seamless performance on all supported platforms.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Does it support Minecraft 1.21.11?</h4>
+                    <p>Yes! Nomad Beta V0.4 is fully compatible with Minecraft version 1.21.11, offering smooth performance and full feature availability.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="https://discord.gg/your-invite-link" target="_blank" class="discord-link">
+            <svg class="discord-icon" viewBox="0 0 127.14 96.36">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.53-10.63,68.58,68.58,0,0,1-10.31-4.94c.87-.64,1.71-1.32,2.51-2a75.52,75.52,0,0,0,72.71,0c.8.71,1.64,1.39,2.51,2a68.42,68.42,0,0,1-10.31,4.94,74.72,74.72,0,0,0,6.53,10.63,105.67,105.67,0,0,0,32.58-18.83C129.07,49.94,123.45,27.1,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
+            </svg>
+            Join our Discord
+        </a>
+        <div class="footer-text">
+            Nomad Development 2026
+        </div>
+    </footer>
+
+    <div class="changelog-modal" id="changelogModal">
+        <div class="changelog-content">
+            <button class="close-btn" onclick="closeChangelog()">✕</button>
+            <h2>What's new in Beta V0.4</h2>
+            <span class="date">Minecraft 1.21.11 Compatible</span>
+            
+            <ul class="changes-list">
+                <li>Overhauled the internal injection method for faster startup times.</li>
+                <li>Added full native compatibility with Minecraft 1.21.11.</li>
+                <li>Added new customizable UI themes.</li>
+                <li>Fixed stability issues occurring on specific server architectures.</li>
+                <li>Improved bypass systems for updated anticheat protocols.</li>
+                <li>Minor bug fixes and performance optimizations.</li>
+            </ul>
+
+            <a href="https://example.com/actual-download-link" target="_blank" class="btn btn-primary download-final-btn">
+                Proceed to Download
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openChangelog() {
+            document.getElementById('changelogModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeChangelog() {
+            document.getElementById('changelogModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('changelogModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeChangelog();
+            }
+        });
+    </script>
+</body>
+</html>
